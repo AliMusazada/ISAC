@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- 
+    SITE 1101 Principles of Information Systems 
+    (c)202X by Sevil Babayeva
+    Submitted in partial fulfillment of the requirements of the course.
+-->
+<html>
+    <head>
+        <title>Homework 3: Programming art</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css">  
+        <script type="text/javascript" src="night-mode.js"></script>  
+    </head>
+    <body>
+        <header>
+            <div class='logo'>
+                <a href="index.html"><img src = "media/logo.png" width = "50" height="50"> </a>
+            </div>
+            <nav>
+                <ul>
+                    <li> <a href="team-members.html"> Members </a></li>
+                    <li><a href="hour-of-code.html">Hour of code</a></li>
+                    <li> <a href = "web-project.html"> Web-project</a></li>
+                    <li><a href="code-artist.html">CodeArt</a></li>
+                    <li>
+                        <button id="night-mode-toggle" class="night-mode-btn">🌙 Night Mode</button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <canvas id="codeArtCanvas"></canvas>
+        <script>
+          const canvas = document.getElementById("codeArtCanvas");
+          const ctx = canvas.getContext("2d");
+      
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+      
+          function randomColor() {
+            return `hsl(${Math.random() * 360}, 100%, 50%)`;
+          }
+      
+          function drawArt() {
+            const width = canvas.width;
+            const height = canvas.height;
+      
+            ctx.clearRect(0, 0, width, height);
+            ctx.strokeStyle = randomColor();
+            ctx.lineWidth = 1;
+      
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const lines = 100;
+            const step = 10;
+      
+            for (let i = 0; i < lines; i++) {
+              const angle = (Math.PI * 2 * i) / lines;
+              const x1 = centerX + Math.cos(angle) * step * i;
+              const y1 = centerY + Math.sin(angle) * step * i;
+              const x2 = centerX + Math.cos(angle + Math.PI) * step * i;
+              const y2 = centerY + Math.sin(angle + Math.PI) * step * i;
+      
+              ctx.beginPath();
+              ctx.moveTo(x1, y1);
+              ctx.lineTo(x2, y2);
+              ctx.stroke();
+            }
+          }
+
+          drawArt();
+        </script>
+    </body>
+</html>
